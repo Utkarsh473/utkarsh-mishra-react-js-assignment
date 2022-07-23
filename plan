@@ -1,0 +1,103 @@
+2. create navigation bar and links for 4 different types
+
+1. search function should search the movies in a given option
+
+3. Upon selection, display the movie object 
+
+4. Implement add to favorites functionality --> similar to add to cart
+
+5. render the favorites page
+
+6. implement remove functionality
+
+Components
+
+1. Movie-tile ---> individual movies
+
+props --> all movie related data  (image, name, add to favorites)
+
+2. Movie-list-display
+
+Read the data from the database -->
+
+For each movie in the category, pass the corresponding props and fill the tile.
+
+Q. Can flex properties be applied to tile?
+
+3. Navbar 
+
+show 5 buttons and apply on-click event
+
+Navbar --> can have a state maintained so as to know which button is active
+
+props --> whichever state is active has to be passed as a prop to movie-list-display
+
+4. Favorites
+
+state - to store all the movies added to it
+
+
+App --> consists of 2 components --> Navbar and movie -list-display
+
+Index --> path mapping through react router
+
+
+
+============================Question=====================================
+
+1. why do (de-structured) variables need to have const or let before them in react 
+
+https://celsiusnotes.com/destructure-object-without-declaration/
+
+https://www.typescriptlang.org/docs/handbook/variable-declarations.html
+
+2. When should I use curly braces { } and parenthesis ( ) in React?
+
+https://javascript.plainenglish.io/curly-braces-versus-parenthesis-in-reactjs-4d3ffd33128f
+
+3. what is ES2015 or ECMA ? is it the same as Javascript version 5
+
+4. Flexbox syntax and usage ---> 
+
+    https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
+
+Note : padding: auto is invalid
+
+============================Skills gained================================
+
+1. Creation of components
+2. Use of axios --> go through post request again
+3. concatenate string with react variable ==> `string${react-variable}`
+4. Place images in public folder and provide path as /images/image-name (if images are present inside images folder)
+
+==============================Pratice required======================
+
+3. practice async await concept more 
+
+4. Need to practice asynchornous programming
+    1. setTimout
+    2. Promises
+    3. Async await
+
+5. Callbacks
+
+6. Practice concatenation of string with react variables.
+
+7. Place images in public folder and provide path as /images/image-name (if images are present inside images folder)
+
+8.async function inside a component creates infinite loop
+https://stackoverflow.com/questions/68762079/why-is-this-async-function-infinite-looping
+
+
+
+
+
+
+
+
+
+
+
+
+
