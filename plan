@@ -59,7 +59,8 @@ https://javascript.plainenglish.io/curly-braces-versus-parenthesis-in-reactjs-4d
 
 4. Flexbox syntax and usage ---> 
 
-    https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
 https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
 
 Note : padding: auto is invalid
@@ -86,8 +87,10 @@ Note : padding: auto is invalid
 
 7. Place images in public folder and provide path as /images/image-name (if images are present inside images folder)
 
-8.async function inside a component creates infinite loop
+8. async function inside a component creates infinite loop
 https://stackoverflow.com/questions/68762079/why-is-this-async-function-infinite-looping
+
+9. load a different set of component when onclick event occurs --> follow React-state lecture
 
 
 

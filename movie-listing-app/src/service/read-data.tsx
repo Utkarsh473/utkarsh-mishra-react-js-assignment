@@ -27,7 +27,7 @@ const getTopRatedIndia = () => {
 
 const getTopRatedMovies = () => {
 
-    return axios.get('http://localhost:3001/top-rated-india')
+    return axios.get('http://localhost:3001/top-rated-movies')
     .then(response => response.data)
     .catch(error => console.log(error));
 
@@ -35,7 +35,7 @@ const getTopRatedMovies = () => {
 
 const getFavorite = () => {
 
-    return axios.get('http://localhost:3001/favorit')
+    return axios.get('http://localhost:3001/favourit')
     .then(response => response.data)
     .catch(error => console.log(error));
 
@@ -43,7 +43,7 @@ const getFavorite = () => {
 
 const addToFavorite = (data: any) => {
 
-    return axios.post('http://localhost:3001/favorit', 
+    return axios.post('http://localhost:3001/favourit', 
     data,
     {
         headers: {

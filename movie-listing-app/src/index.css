@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F7FBFF;
 }
 
 code {
@@ -13,8 +14,40 @@ code {
 }
 
 .parent{
+  margin-top: 2rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
+.Nav-parent{
+  min-width: 50%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  background-color: rgb(37,38,49,0.9);
+}
+
+.Nav-child-button{
+  flex-basis: 12%;
+  padding: 1rem;
+  color: #F4F7F6; 
+  font-weight: bold; 
+  border: none;
+  background: none;
+  font-size: 0.90rem;
+}
+
+#search-bar{
+  flex-basis: 20%;
+  padding: 1rem;
+  background-color: white;
+  margin-left: auto;
+}
+
+.Nav-child-button:hover{
+  color: #EE4F6B;
+  
+}
+

@@ -5,18 +5,14 @@ import MovieTile from './components/Movie-tile';
 import MovieListDisplay from './components/Movie-list-display';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Navbar from './components/Navbar';
+import display from './display';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <>
-    <MovieListDisplay list="movies-coming" ></MovieListDisplay>
-  </>
-
-
-
-
+  display
 );
 
 // If you want to start measuring performance in your app, pass a function

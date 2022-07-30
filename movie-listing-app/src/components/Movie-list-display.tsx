@@ -3,6 +3,7 @@ import axios from "axios";
 import movie from "../model/movie"
 import MovieTile from "./Movie-tile";
 import "../index.css"
+import movieObject from "../model/movie";
 
 import {
     getMoviesinTheatres,
@@ -22,9 +23,10 @@ function MovieListDisplay(props : Props){
 
     let  [data, setData] = useState([]);
 
+
     useEffect(() => {
             fetchData();
-        }, [])
+        }, [list])
 
     const fetchData = async () => {
             try
@@ -32,30 +34,42 @@ function MovieListDisplay(props : Props){
                 switch (list)
                 {
                     case "movies-coming": {
-                        console.log("hello")
+                        console.log("movies-coming")
                         data = await getMoviescoming()
+                        //console.log(data)
+                        /*data.map(
+                            (movie : any, idx : any) => (console.log(movie))
+                            )*/
                         break;
             
                     }
             
                     case "movies-in-theaters": {
+                        console.log("movies-in-theaters")
                         data = await getMoviesinTheatres();
+                        console.log(data)
                         break;
 
                     }
             
                     case "top-rated-india" :{
+                        console.log("top-rated-india")
                         data = await getTopRatedIndia();
+                        console.log(data)
                         break;
                     }
             
                     case "top-rated-movies" :{
+                        console.log("top-rated-movies")
                         data = await getTopRatedMovies();
+                        console.log(data)
                         break;
                     }
             
                     case "favourit" :{
+                        console.log("favourit")
                         data = await getFavorite();
+                        console.log(data)
                         break;
                     }
                 }
@@ -71,16 +85,22 @@ function MovieListDisplay(props : Props){
 
     
     
-    console.log(data)
+    // console.log(data)
 
     const el = (
+        <>
+        {/*<h1>{list}</h1>*/}
         <div className="parent">
-            {data.map(
-                (movie : any, idx : any) => (
-                    <MovieTile title={movie.title} poster={movie.poster} posterurl={movie.posterurl}/>
+            {data.length!=0 && data.map(
+                (movie : movieObject, idx : any) => (
+                    <>
+                    {/*<div>{movie}</div>*/}
+                    <MovieTile movieName={movie}></MovieTile> 
+                    </>
                 )
             )}
         </div>
+        </>
     ) 
 
     return el;
