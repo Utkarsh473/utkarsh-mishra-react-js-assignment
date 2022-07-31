@@ -55,6 +55,18 @@ const addToFavorite = (data: any) => {
 
 }
 
+const deleteFromFavourite = (id: number) => {
+
+    return axios.delete('http://localhost:3001/favourit/'+id,
+    {headers: {
+            'Content-Type' : 'application/json'
+        }
+    })
+    .then(response => response.data)
+    .catch(error => console.log(error));
+
+}
+
 
 
 export {
@@ -63,7 +75,8 @@ export {
     getTopRatedIndia,
     getMoviescoming,
     getFavorite,
-    addToFavorite
+    addToFavorite,
+    deleteFromFavourite
 }
 
 

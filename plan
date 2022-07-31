@@ -92,6 +92,15 @@ https://stackoverflow.com/questions/68762079/why-is-this-async-function-infinite
 
 9. load a different set of component when onclick event occurs --> follow React-state lecture
 
+10. Pass JSON object as a prop to component
+https://bobbyhadz.com/blog/react-typescript-pass-object-as-props
+
+plan for tomorrow
+
+1. Create 2 custom popups --> initially their state will be false. Once added to favorite, they will appear.
+
+2. create getMovieByID method --> check if a movie is already present in favorite list - done
+
 
 
 

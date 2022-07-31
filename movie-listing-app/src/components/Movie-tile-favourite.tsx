@@ -3,7 +3,7 @@ import { FileExtensionInfo } from "typescript"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faHeartbeat, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { faHeart } from "@fortawesome/free-regular-svg-icons"
+import { faDeleteLeft, faL } from "@fortawesome/free-solid-svg-icons"
 import "../MovieTile.css"
 import {
     getMoviesinTheatres,
@@ -11,9 +11,11 @@ import {
     getTopRatedIndia,
     getMoviescoming,
     getFavorite,
-    addToFavorite
+    addToFavorite,
+    deleteFromFavourite
 } from '../service/read-data';
 import movieObject from "../model/movie"
+import { render } from "@testing-library/react"
 
 
 type Props = {
@@ -38,17 +40,19 @@ const findDataAndAdd = async function (movie: movieObject)
     }
 }
 
-function MovieTile (props : Props)
+const removeFromFavourite = async (movie: movieObject) =>
+{
+        
+        await deleteFromFavourite(movie.id)
+}
+
+function MovieTileFavourite (props : Props)
 {
     let [movieDetailShow, setMovieDetailShow] = useState(false);
 
     let [style, setStyle] = useState("innerContainer-white");
 
-    const postFavourite = (movie: movieObject) => () => 
-    {
-        
-        findDataAndAdd(movie)
-    }
+    
     
     const movie = props.movieName
     const el = 
@@ -60,10 +64,10 @@ function MovieTile (props : Props)
         <img style={{width: "100%", height: "30vw", objectFit: "cover"}} src={`/img/${movie.poster}`} alt={movie.posterurl}
         ></img>
         <div className="innerContainer1">{movie.title}</div>
-        <button className={style} onClick={postFavourite(movie)}>
+        <button className={style} onClick={() => removeFromFavourite(movie)}>
             <>
-            <span>Add to Favourite  </span>
-            <FontAwesomeIcon icon={faHeart} color="red"/>
+            <span>Remove From Favourite  </span>
+            <FontAwesomeIcon icon={faDeleteLeft} size="lg"/>
             </>
         </button>
     </div>
@@ -73,4 +77,4 @@ function MovieTile (props : Props)
     return el;
 }
 
-export default MovieTile;
+export default MovieTileFavourite;

@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F7FBFF;
+  background-color: #F8FAFD;
 }
 
 code {
@@ -32,7 +32,7 @@ code {
 .Nav-child-button{
   flex-basis: 12%;
   padding: 1rem;
-  color: #F4F7F6; 
+  color: wheat; 
   font-weight: bold; 
   border: none;
   background: none;

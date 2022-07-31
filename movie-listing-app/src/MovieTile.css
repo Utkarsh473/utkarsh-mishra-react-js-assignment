@@ -2,7 +2,7 @@
     width: 20%;
     min-width: 10em;
     padding: 1rem;
-    border: 2px solid grey;
+    border: 3px solid grey;
     margin-top: 2rem
 
 }
@@ -14,7 +14,7 @@
     
 }
 
-.innerContainer2{
+.innerContainer-white{
 
    /* marginTop: "10px", // tbd
     textAlign: "center" as const, 
@@ -41,4 +41,32 @@
 	letter-spacing: 0.04em;
     
 }
+
+.innerContainer-red{
+
+    /* marginTop: "10px", // tbd
+     textAlign: "center" as const, 
+     borderRadius: "25%",
+     border: "2px solid #D175FE",
+     backgroundColor: "white",
+     */
+ 
+     
+     display: block;
+     position: relative;
+     margin: 0.5em auto;
+     padding: .6em 1.2em;
+     cursor: pointer;
+ 
+     background: #EF4430;
+     border-radius: .5em;
+     border: 2px solid #9163E4;
+ 
+     text-transform: uppercase;
+     font-size: 0.85em;
+     font-family: Work Sans, sans-serif;
+     font-weight: 500;
+     letter-spacing: 0.04em;
+     
+ }
 

@@ -13,6 +13,7 @@ import {
     getFavorite,
     addToFavorite
 } from '../service/read-data';
+import MovieTileFavourite from "./Movie-tile-favourite";
 
 type Props = {
     list : string;
@@ -26,7 +27,7 @@ function MovieListDisplay(props : Props){
 
     useEffect(() => {
             fetchData();
-        }, [list])
+        }, [list, data])
 
     const fetchData = async () => {
             try
@@ -89,17 +90,33 @@ function MovieListDisplay(props : Props){
 
     const el = (
         <>
-        {/*<h1>{list}</h1>*/}
-        <div className="parent">
-            {data.length!=0 && data.map(
-                (movie : movieObject, idx : any) => (
-                    <>
-                    {/*<div>{movie}</div>*/}
-                    <MovieTile movieName={movie}></MovieTile> 
-                    </>
-                )
-            )}
-        </div>
+            {
+            list!=="favourit" && <div className="parent">
+                {data.length!=0 && data.map(
+                    (movie : movieObject, idx : any) => (
+                        <>
+                        {/*<div>{movie}</div>*/}
+                        <MovieTile key={idx} movieName={movie}></MovieTile> 
+                        </>
+                    )
+                )}
+            </div>
+    }
+
+    {
+        list==="favourit" && <div className="parent">
+        {data.length!=0 && data.map(
+            (movie : movieObject, idx : any) => (
+                <>
+                {/*<div>{movie}</div>*/}
+                <MovieTileFavourite key={idx} movieName={movie}></MovieTileFavourite> 
+                </>
+            )
+        )}
+    </div>
+    }
+
+
         </>
     ) 
 

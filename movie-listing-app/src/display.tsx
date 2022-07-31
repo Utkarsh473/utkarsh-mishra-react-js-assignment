@@ -11,7 +11,7 @@ const display = (
         <MovieListDisplay list="top-rated-movies" ></MovieListDisplay>
         <MovieListDisplay list="favourit" ></MovieListDisplay>
         </Navbar>
-        </>
+    </>
 )
 
 export default display;
