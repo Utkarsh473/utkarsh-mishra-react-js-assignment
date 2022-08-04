@@ -16,6 +16,7 @@ import {
 } from '../service/read-data';
 import movieObject from "../model/movie"
 import { render } from "@testing-library/react"
+import MovieListDisplay from "./Movie-list-display"
 
 
 type Props = {

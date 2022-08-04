@@ -1,8 +1,11 @@
-import React, {MouseEvent, Component, ReactElement, cloneElement } from "react";
+import React, {MouseEvent, Component, ReactElement, cloneElement, Children } from "react";
 import "../index.css"
+import withFilter from "./withSearch"
+
 
 type State = {
     activeChild : number
+    filterKey: string
 }
 
 type Props={
@@ -10,7 +13,7 @@ type Props={
 }
 
 
-class Navbar extends Component<Props, State>{
+class Navbar extends Component<any, State>{
 
     constructor(props: Props)
     {
@@ -19,7 +22,8 @@ class Navbar extends Component<Props, State>{
     }
     
     state = {
-        activeChild : 0
+        activeChild: 0,
+        filterKey: ''
     };
 
     setActiveChild = async (num: number) => {
@@ -31,15 +35,27 @@ class Navbar extends Component<Props, State>{
 
     }
 
+    setFilterKey = async (key: string) =>
+    {
+        
+        // console.log("filtr key is", this.state.filterKey)
+        await this.setState({
+            filterKey: key
+        })
+    }
+
     
     render(): React.ReactNode {
         
-        console.log("re-render")
-        
-        const {activeChild} = this.state
-        const {children} = this.props
+        console.log(this.state.filterKey)
 
-        console.log(activeChild, children)
+        // const {activeChild, filterKey} = this.state
+        
+        // const {filterKey, filtereditems, filter} = this.props
+
+
+
+        // console.log(activeChild, children)
         
         const el = (
         <>
@@ -49,9 +65,9 @@ class Navbar extends Component<Props, State>{
         <button className="Nav-child-button" onClick={() => this.setActiveChild(2)}>Top rated India</button>
         <button className="Nav-child-button" onClick={() => this.setActiveChild(3)}>top-rated-movies</button>
         <button className="Nav-child-button" onClick={() => this.setActiveChild(4)}>Favorite</button>
-        <input id="search-bar" type="text" placeholder="Search.."/>
+        <input id="search-bar" type="text" placeholder="Search.." value={this.state.filterKey} onChange={(event) => this.setFilterKey(event.target.value)}/>
         </div>
-        {children[activeChild]}
+        {React.cloneElement(this.props.children[this.state.activeChild], {filterKeyProp: this.state.filterKey})}
         </> 
         )
 

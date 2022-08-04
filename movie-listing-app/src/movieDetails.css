@@ -1,0 +1,20 @@
+.image{
+    height: 100%;
+    flex-shrink: 1;
+}
+.text{
+    flex-basis: 60%;
+    flex-shrink: 1;
+}
+
+.text td{
+    width: 5%;
+}
+
+.wrapper{
+    display: flex;
+    width: 80%;
+    margin-top: 3rem;
+    flex-direction: row wrap;
+    justify-content: space-evenly;
+}

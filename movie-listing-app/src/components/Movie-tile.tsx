@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { FileExtensionInfo } from "typescript"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
@@ -14,10 +14,11 @@ import {
     addToFavorite
 } from '../service/read-data';
 import movieObject from "../model/movie"
-
+import { MovieDetails } from "./Movie-details-display"; 
 
 type Props = {
     movieName: movieObject
+    func: Function
 }
 
 const findDataAndAdd = async function (movie: movieObject) 
@@ -40,9 +41,10 @@ const findDataAndAdd = async function (movie: movieObject)
 
 function MovieTile (props : Props)
 {
-    let [movieDetailShow, setMovieDetailShow] = useState(false);
+    
 
     let [style, setStyle] = useState("innerContainer-white");
+
 
     const postFavourite = (movie: movieObject) => () => 
     {
@@ -51,14 +53,15 @@ function MovieTile (props : Props)
     }
     
     const movie = props.movieName
+    const changeState = props.func
     const el = 
     (
      <> 
     {
-    !movieDetailShow && (
+    (
     <div className="outerContainer">
         <img style={{width: "100%", height: "30vw", objectFit: "cover"}} src={`/img/${movie.poster}`} alt={movie.posterurl}
-        ></img>
+        onClick={() => changeState(movie)}></img>
         <div className="innerContainer1">{movie.title}</div>
         <button className={style} onClick={postFavourite(movie)}>
             <>
@@ -68,6 +71,8 @@ function MovieTile (props : Props)
         </button>
     </div>
     )}
+
+    
     </>  
     )
     return el;
