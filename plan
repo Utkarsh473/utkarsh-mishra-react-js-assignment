@@ -102,6 +102,15 @@ plan for tomorrow
 2. create getMovieByID method --> check if a movie is already present in favorite list - done
 
 
+State to be controlled from display 
+
+if (movie click is active --> show movieDetails)
+
+else show Navbar with active child
+
+
+
+
 
 
 
