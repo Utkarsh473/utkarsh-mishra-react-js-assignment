@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { FileExtensionInfo } from "typescript"
+import { FileExtensionInfo, isPropertyAccessExpression } from "typescript"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faHeartbeat, faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -17,34 +17,26 @@ import {
 import movieObject from "../model/movie"
 import { render } from "@testing-library/react"
 import MovieListDisplay from "./Movie-list-display"
+import { count } from "console"
 
 
 type Props = {
     movieName: movieObject
+    func: Function
+    setFavoriteModified: Function
+    count: number
 }
 
-const findDataAndAdd = async function (movie: movieObject) 
+const removeFromFavourite = async (movie: movieObject, props: Props) =>
 {
-    let data = await(getFavorite())
-
-    let res = data.find((item: movieObject) => item.id === movie.id)
-
-    // console.log(res)
-
-    if(res!== undefined)
-    {
-        alert("Already added to favourite")
-    }
-
-    else{
-        addToFavorite(movie)
-    }
-}
-
-const removeFromFavourite = async (movie: movieObject) =>
-{
-        
+    try{    
         await deleteFromFavourite(movie.id)
+        props.setFavoriteModified(props.count+1)
+
+    }catch(error)
+    {
+        console.log(error)
+    }
 }
 
 function MovieTileFavourite (props : Props)
@@ -56,6 +48,8 @@ function MovieTileFavourite (props : Props)
     
     
     const movie = props.movieName
+    const changeState = props.func
+
     const el = 
     (
      <> 
@@ -63,9 +57,9 @@ function MovieTileFavourite (props : Props)
     !movieDetailShow && (
     <div className="outerContainer">
         <img style={{width: "100%", height: "30vw", objectFit: "cover"}} src={`/img/${movie.poster}`} alt={movie.posterurl}
-        ></img>
+        onClick={() => changeState(movie)}></img>
         <div className="innerContainer1">{movie.title}</div>
-        <button className={style} onClick={() => removeFromFavourite(movie)}>
+        <button className={style} onClick={() => removeFromFavourite(movie, props)}>
             <>
             <span>Remove From Favourite  </span>
             <FontAwesomeIcon icon={faDeleteLeft} size="lg"/>

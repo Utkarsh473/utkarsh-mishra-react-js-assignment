@@ -19,10 +19,11 @@ import MovieTileFavourite from "./Movie-tile-favourite";
 type Props = {
     list : string,
     filterKeyProp: string
+    changeDisplay: Function
 }
 
 function MovieListDisplay(props : Props){
-    const {list, filterKeyProp} = props
+    const {list, filterKeyProp, changeDisplay} = props
 
     /*
     console.log("list: "+list)
@@ -31,43 +32,28 @@ function MovieListDisplay(props : Props){
 
     let  [data, setData] = useState([]);
 
-    let [movieDetailShow, setMovieDetailShow] = useState(false);
-
-    let [movieListShow, setMovieListShow] = useState(true);
-
-    let [movieDetail, setMovieDetail] = useState({} as movieObject)
-
-
-
-    const toggleState = (movieObj: movieObject) =>
-    {
-        setMovieDetailShow(movieDetailShow => !movieDetailShow)
-        setMovieListShow(movieListShow => !movieListShow)
-
-        setMovieDetail(movieObj)
-
-
-        console.log("movieDetailsshow="+movieDetailShow)
-
-    }
+    let [favoriteModified, setFavoriteModified] = useState(0)
 
 
     useEffect(() => {
             fetchData();
-        },[movieDetailShow, filterKeyProp, list])
+        },[favoriteModified, filterKeyProp, list])
 
     const fetchData = async () => {
-            try
+
+        let movies = []    
+        
+        try
             {
                 switch (list)
                 {
                     case "movies-coming": {
                         console.log("movies-coming")
-                        data = await getMoviescoming()
-                        data = data.filter(
+                        movies = await getMoviescoming()
+                        movies = movies.filter(
                             (item: any) => item.title.toUpperCase().includes(filterKeyProp.toUpperCase())
                         )
-                        console.log(data)
+                        console.log(movies)
                         /*data.map(
                             (movie : any, idx : any) => (console.log(movie))
                             )*/
@@ -82,53 +68,52 @@ function MovieListDisplay(props : Props){
             
                     case "movies-in-theaters": {
                         console.log("movies-in-theaters")
-                        data = await getMoviesinTheatres();
-                        data = data.filter(
+                        movies = await getMoviesinTheatres();
+                        movies = movies.filter(
                             (item: any) => item.title.toUpperCase().includes(filterKeyProp.toUpperCase())
                         )
-                        console.log(data)
+                        console.log(movies)
                         break;
 
                     }
             
                     case "top-rated-india" :{
                         console.log("top-rated-india")
-                        data = await getTopRatedIndia();
-                        data = data.filter(
+                        movies = await getTopRatedIndia();
+                        movies = movies.filter(
                             (item: any) => item.title.toUpperCase().includes(filterKeyProp.toUpperCase())
                         )
-                        console.log(data)
+                        console.log(movies)
                         break;
                     }
             
                     case "top-rated-movies" :{
                         console.log("top-rated-movies")
-                        data = await getTopRatedMovies();
-                        data = data.filter(
+                        movies = await getTopRatedMovies();
+                        movies = movies.filter(
                             (item: any) => item.title.toUpperCase().includes(filterKeyProp.toUpperCase())
                         )
-                        console.log(data)
+                        console.log(movies)
                         break;
                     }
             
                     case "favourit" :{
                         console.log("favourit")
-                        data = await getFavorite();
-                        data = data.filter(
+                        movies = await getFavorite();
+                        movies = movies.filter(
                             (item: any) => item.title.toUpperCase().includes(filterKeyProp.toUpperCase())
                         )
-                        console.log(data)
+                        console.log(movies)
                         break;
                     }
                 }
-                setData(data);
+                setData(movies);
             }   
 
             catch(error: any)
             {
                 console.log(error.message);
             }
-
     }
 
     
@@ -139,13 +124,13 @@ function MovieListDisplay(props : Props){
         <>
 
             {
-            movieListShow && list!=="favourit" && <div className="parent">
+            list!=="favourit" && <div className="parent">
                 <>
                 {
                 data.length!=0 && data.map(
                     (movie : movieObject, idx : any) => (
                         <>
-                        <MovieTile key={idx} movieName={movie} func={toggleState}></MovieTile> 
+                        <MovieTile key={idx} movieName={movie} func={changeDisplay}></MovieTile> 
                         </>
                     )
                 )}
@@ -154,21 +139,18 @@ function MovieListDisplay(props : Props){
     }
 
     {
-        movieListShow && list==="favourit" && <div className="parent">
+        list==="favourit" && <div className="parent">
         {data.length!=0 && data.map(
             (movie : movieObject, idx : any) => (
                 <>
                 {/*<div>{movie}</div>*/}
-                <MovieTileFavourite key={idx} movieName={movie}></MovieTileFavourite> 
+                <MovieTileFavourite key={idx} movieName={movie} func={changeDisplay} setFavoriteModified={setFavoriteModified} count={favoriteModified}></MovieTileFavourite> 
                 </>
             )
         )}
     </div>
     }
 
-    { 
-        movieDetailShow && <MovieDetails movie={movieDetail}></MovieDetails>
-    }
 
 
         </>

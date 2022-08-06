@@ -31,11 +31,17 @@ const findDataAndAdd = async function (movie: movieObject)
 
     if(res!== undefined)
     {
-        alert("Already added to favourite")
+        alert("Error 404: Already added to favourite")
     }
 
     else{
+        try{
         addToFavorite(movie)
+        alert("successfully added to Favorites")
+        }catch(error)
+        {
+            console.log(error)
+        }
     }
 }
 
@@ -45,15 +51,24 @@ function MovieTile (props : Props)
 
     let [style, setStyle] = useState("innerContainer-white");
 
+    let [heartColor, setHeartColor] = useState("red")
+
+    useEffect( () => {
+
+    }, [heartColor, style])
+
 
     const postFavourite = (movie: movieObject) => () => 
     {
         
+        setStyle("innerContainer-red")
+        setHeartColor("yellow")
         findDataAndAdd(movie)
     }
     
     const movie = props.movieName
     const changeState = props.func
+
     const el = 
     (
      <> 
@@ -66,7 +81,7 @@ function MovieTile (props : Props)
         <button className={style} onClick={postFavourite(movie)}>
             <>
             <span>Add to Favourite  </span>
-            <FontAwesomeIcon icon={faHeart} color="red"/>
+            <FontAwesomeIcon icon={faHeart} color={heartColor}/>
             </>
         </button>
     </div>

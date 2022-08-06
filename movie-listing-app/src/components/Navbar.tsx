@@ -1,39 +1,36 @@
 import React, {MouseEvent, Component, ReactElement, cloneElement, Children } from "react";
 import "../index.css"
-import withFilter from "./withSearch"
 
 
 type State = {
-    activeChild : number
-    filterKey: string
+    filterKey: string,
+    activeButton: number
 }
+
+
 
 type Props={
-    children: ReactElement[]
+    children: ReactElement[],
+    activeChild : number,
+    setActiveChild: Function
 }
 
 
-class Navbar extends Component<any, State>{
+class Navbar extends Component<Props, State>{
 
     constructor(props: Props)
     {
         super(props);
 
-    }
-    
-    state = {
-        activeChild: 0,
-        filterKey: ''
-    };
+        this.state = {
+            filterKey: '',
+            activeButton: this.props.activeChild
+        };
 
-    setActiveChild = async (num: number) => {
-        await this.setState({
-            activeChild: num
-        })
+    }
+
 
         // console.log(this.state)
-
-    }
 
     setFilterKey = async (key: string) =>
     {
@@ -49,9 +46,18 @@ class Navbar extends Component<any, State>{
         
         console.log(this.state.filterKey)
 
-        // const {activeChild, filterKey} = this.state
+        const {filterKey, activeButton} = this.state
         
-        // const {filterKey, filtereditems, filter} = this.props
+        const {children, activeChild, setActiveChild} = this.props
+
+        const changeState = (num: number) => {
+            this.setState({
+                activeButton: num
+            })
+
+            setActiveChild(num);
+
+        }
 
 
 
@@ -60,14 +66,22 @@ class Navbar extends Component<any, State>{
         const el = (
         <>
         <div className = "Nav-parent">
-        <button className="Nav-child-button" onClick={() => this.setActiveChild(0)}>Movies Coming</button>
-        <button className="Nav-child-button" onClick={() => this.setActiveChild(1)}>Movies in Theaters</button>
-        <button className="Nav-child-button" onClick={() => this.setActiveChild(2)}>Top rated India</button>
-        <button className="Nav-child-button" onClick={() => this.setActiveChild(3)}>top-rated-movies</button>
-        <button className="Nav-child-button" onClick={() => this.setActiveChild(4)}>Favorite</button>
-        <input id="search-bar" type="text" placeholder="Search.." value={this.state.filterKey} onChange={(event) => this.setFilterKey(event.target.value)}/>
+
+            <button style={{backgroundColor: (activeButton==0) ? 'grey' : '', color: (activeButton==0) ?'white':''}} className="Nav-child-button" onClick={() => changeState(0)}>Movies Coming</button>
+
+            <button style={{backgroundColor: (activeButton==1) ? 'grey' : '',color: (activeButton==1) ?'white':''}} className="Nav-child-button" onClick={() => changeState(1)}>Movies in Theaters</button>
+
+            <button style={{backgroundColor: (activeButton==2) ? 'grey' : '',color: (activeButton==2) ?'white':''}} className="Nav-child-button" onClick={() => changeState(2)}>Top rated India</button>
+
+            <button style={{backgroundColor: (activeButton==3) ? 'grey' : '',color: (activeButton==3) ?'white':''}} className="Nav-child-button" onClick={() => changeState(3)}>top-rated-movies</button>
+
+            
+            <button style={{backgroundColor: (activeButton==4) ? 'grey' : '',color: (activeButton==4) ?'white':''}} className="Nav-child-button" onClick={() => changeState(4)}>Favorite</button>
+            
+            <input id="search-bar" type="text" placeholder="Search.." value={this.state.filterKey} onChange={(event) => this.setFilterKey(event.target.value)}/>
+
         </div>
-        {React.cloneElement(this.props.children[this.state.activeChild], {filterKeyProp: this.state.filterKey})}
+        {React.cloneElement(children[activeChild], {filterKeyProp: this.state.filterKey})}
         </> 
         )
 
